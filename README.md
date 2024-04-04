@@ -4,6 +4,9 @@
 **Draft Title:**
 Resolving the ranges of _Marmota_ using Ultraconserved Elements
 
+**_NOTE_** Files were too large to upload to GitHub. Find all files on Google Drive at the link below: 
+https://drive.google.com/drive/folders/1Pbm9jUuTzk7BnbZsyBBpceDEt0-SzYdO?usp=sharing
+
 **Question and Relevance**
 
 This project will aim to unravel the eevolutionary history of marmots (_Marmota sp._) by addressing their phylogenetic relationships. By using ultraconserved elements (UCEs) from all 15 extant marmot species, this project will pinpoint the divesification of marmots. The relevance of this project lies in understanding how marmots rapidly diversified during the Pleistocene in response to a changing climate in cold, seasonal environments. By improving our understanding of evolutionary dynamics in response to past environmental changes I will inform our understanding of species' responses to ongoing climate change and alterations to habitat. This helps us to better conserve these species by helping us know species relationships and cryptic diversity. 
