@@ -48,14 +48,15 @@ The 75% concatenated supermatrix obtained from researchers for Mills _et al._ 20
 Non-monophyletic sorting occurred for three species: _M. baibacina_, _M. caligata_, and _M. himalayana_, seen in Figure 3. Two candidates were labeled as _M. baibacina_, with one candidate, Marmota_baibacina_01, placed sister to the clade formed by the candidates representing _M. menzbieri_, and the other candidate, Marmota_baibacina_02, placed in a clade with the candidate representing _M. kastschenkoi_. Candidates representing _M. caligata_ were sorted into multiple clades within subgenus _Petromarmota_. The candidate Marmota_caligata_10 was placed sister to the clade formed by the candidates representing _M. olympus_, with these taxa comprising a clade sister to the candidate Marmota_caligata_09. The candidates Marmota_caligata_01 through _06 formed a clade sister to the candidates representing _M. vancouverensis_, with these taxa forming a clade sister to the candidates Marmota_caligata_07 and _08. The four candidates representing _M. himalayana_ were grouped into two separate clades of genus _Marmota_. The candidates Marmota_himalayana_02 through _04 were placed in a clade sister to the candidate representing _M. caudata_, while the candidate Marmota_himalayana_01 was placed sister to the clade formed by the candidates representing _M. bobak_.
 
 ![Figure4_MillsSpeciesTree](https://github.com/mmorassutti/biol550_project/assets/160165592/ddbe97c6-a998-4ffb-8829-cbff40b2df52)
-**Figure 4.** A maximum likelihood species tree from Mills _et al._ 2023 obtained with coalescent-based methods using gene trees from each UCE loci present in 75% of taxa in their dataset and the mitogenomes from these taxa. 
+**Figure 4.** A maximum likelihood species tree from Mills _et al._ 2023 estimated with coalescent-based methods using gene trees from each UCE loci present in 75% of taxa in their dataset and the mitogenomes from these taxa. 
 
 The chronogram obtained through a calibration completed with four fossils and a penalized likelihood method may be seen in Figure 5. This chronogram will be compared to that obtained using 8 fossils and with Bayesian methods, which is labeled as Figure 6 in this report (Figure 7 in Mills _et al._ 2023). The chronogram obtained from penalized likelihood analysis for this project the divergence time of tribe Marmotini from tribe Xerini at 30.9 million years ago (Ma), while this divergence time from the chronogram obtained from Bayesian analysis estimated this divergence time at 35.0 Ma (95%confidence interval (C.I.) = 33.8–36.7). The penalized likelihood analysis estimated the divergence of _Marmota_ from other members of Marmotini at 18.4 Ma, while Bayesian analysis estimated this divergence at 16.3 Ma (95% C.I. = 13.7–18.8). Penalized likelihood analysis estimated the divergence of subgenus _Petromarmota_ from other members of _Marmota_ at 15.5 Ma, while Bayesian analysis estimated this divergence at 5.71 Ma (95% C.I. = 3.95–7.62). For the crown diversification within _Petromarmota_, this project’s analysis estimated this to occur 13.2 Ma, however the estimation by Bayesian analysis estimated this to have occurred 2.31 Ma (95% C.I. = 2.62–3.11). Finally, this project’s analysis estimated the crown diversification of other members of _Marmota_, in the subgenus _Marmota_, to have occurred 12.5 Ma, while Bayesian analysis estimated this radiation to have occurred 3.57 Ma (95% C.I. = 2.45–4.72). 
 
-![Figure5_Chronogram](https://github.com/mmorassutti/biol550_project/assets/160165592/e7449f5a-f49a-40eb-a8d4-7946498b7d68)
+Figure5_Chronogram.png
+**Figure 5.** A chronogram estimated using the cladogram seen in Figure 3. Time calibration was estimated using penalized likelihood and four fossils. Labeled points correspond with the following fossils: A - _Palaeosciurus goti_, B - _Miospermophilus_, C - _Marmota marmota_, D - _Marmota bobak_.
 
 ![Figure6_MillsChronogram](https://github.com/mmorassutti/biol550_project/assets/160165592/be1088f6-a744-4c26-821d-3f12e1bf9ddb)
-
+**Figure 6.** A chronogram from Mills _et al._ 2023 estimated with Bayesian methods and eight fossils. 
 
 The chronogram from Mills et al. 2023 (Figure 6) also placed the more basal nodes of the tree at much younger ages than that which were obtained with fewer fossils and with penalized likelihood. In the time-calibrated tree obtained through the analysis for this project estimated the divergence of _A. rufa_ from the other members of order Rodentia at 100.2 Ma, while the chronogram from Mills _et al._ 2023 estimated this divergence time at 51.1 Ma (95% C.I. = 58–42). The divergence time of subfamily Xerinae from other sciurids estimated by penalized likelihood was estimated at 65.5 Ma, while Bayesian methods estimated this divergence at 39.4 Ma (95% C.I. = 40.5–38).
 
@@ -144,3 +145,163 @@ Yang, Z., Rannala, B., 2006. Bayesian estimation of species divergence times und
 Yang, Z., 2007. PAML 4: phylogenetic analysis by maximum likelihood. _Molecular Biology and Evolution_, 24, 1586–1591.
 
 Zhang, Y. M., Williams, J. L., Lucky, A. 2019. Understanding UCEs: A comprehensive primer on using ultraconserved elements for arthropod phylogenomics. _Insect Systematics and Diversity_, 3, 1–3.
+
+
+**R Code**
+#load package
+library(ape)
+
+#load tree
+phylo <- read.tree(file="top10pconcat-1.nexus.contree")
+
+##root tree
+phy=root(phylo, outgroup = "Aplodontia_rufa", resolve.root = TRUE)
+
+##get node labels for fossils
+#Douglassciurus oaxacensis 	Oaxaca, Mexico 	40.4 	Sciuridae - Aplodontiidae 		Ferrusquia-Villafranca et al. 2018 NODE=62
+getMRCA(phy, tip = c("Aplodontia_rufa", "sciurus_vulgaris")) 
+
+#Plesiarctomys (Sciurus) spectabilis 	Egerkingen, Switzerland 	37.2 	Sciurus - other sciurids 		Costeur and Schneider, 2011 NODE=63
+getMRCA(phy, tip = c("sciurus_vulgaris", "xerus_inaurus"))
+
+#Palaeosciurus goti 		Quercy, France 	28.4 	Xerus - Marmotini 		McKenna and Bell 1997 NODE=64 
+getMRCA(phy, tip = c("xerus_inaurus", "Cynomys_gunnisoni"))
+
+#Miospermophilus 		Colorado, USA 	16.0 	Spermophilus - Marmota 		(Black, 1963) NODE=65
+getMRCA(phy, tip = c("Cynomys_gunnisoni", "Marmota_flaviventris_04"))
+
+#Marmota bobak 		Kantemirovka, Russia 	0.5 	M. bobak - M. baibacina 		Gromov et al. (1965); NODE=74 
+getMRCA(phy, tip = c("Marmota_bobak_02", "Marmota_baibacina_01"))
+
+#Marmota marmota 		Castile, Spain 	1.2 	M. marmota - sister clade 		Gil and Ses´e (1991) NODE=72
+getMRCA(phy, tip = c("Marmota_marmota_01", "Marmota_baibacina_01"))
+
+#Marmota himalayana 		Shanxi, China 	1.0 	M. himalayana - M. sibirica 	Gromov et al. 1965 NODE=80
+getMRCA(phy, tip = c("Marmota_himalayana_02", "Marmota_sibirica_05"))
+
+#Marmota monax 		Maryland, USA 	0.8 	M. monax - sister clade 		Kurten and Anderson (1980) NODE=69
+getMRCA(phy, tip = c("Marmota_monax_02", "Marmota_broweri_02"))
+
+##Run chronopl for each fossil
+#Douglassciurus oaxacensis 	Oaxaca, Mexico 	40.4 	Sciuridae - Aplodontiidae 		Ferrusquia-Villafranca et al. 2018 NODE=62
+chronopl(phy, lambda=1, age.min = c(40.4), age.max = c(45.4),node = c(62), S = 1, tol = 1e-8,CV = FALSE, eval.max = 500, iter.max = 500)
+
+#Plesiarctomys (Sciurus) spectabilis 	Egerkingen, Switzerland 	37.2 	Sciurus - other sciurids 		Costeur and Schneider, 2011 NODE=63
+chronopl(phy, lambda=1, age.min = c(37.2), age.max = c(42.2),node = c(63), S = 1, tol = 1e-8,CV = FALSE, eval.max = 500, iter.max = 500)
+
+#Palaeosciurus goti 		Quercy, France 	28.4 	Xerus - Marmotini 		McKenna and Bell 1997 NODE=64 
+chronopl(phy, lambda=1, age.min = c(28.4), age.max = c(33.4),node = c(64), S = 1, tol = 1e-8,CV = FALSE, eval.max = 500, iter.max = 500)
+
+#Miospermophilus 		Colorado, USA 	16.0 	Spermophilus - Marmota 		(Black, 1963) NODE=65
+chronopl(phy, lambda=1, age.min = c(16), age.max = c(21),node = c(65), S = 1, tol = 1e-8,CV = FALSE, eval.max = 500, iter.max = 500)
+
+#Marmota bobak 		Kantemirovka, Russia 	0.5 	M. bobak - M. baibacina 		Gromov et al. (1965); NODE=74 
+chronopl(phy, lambda=1, age.min = c(.5), age.max = c(5.5),node = c(74), S = 1, tol = 1e-8,CV = FALSE, eval.max = 500, iter.max = 500)
+
+#Marmota marmota 		Castile, Spain 	1.2 	M. marmota - sister clade 		Gil and Ses´e (1991) NODE=72
+chronopl(phy, lambda=1, age.min = c(1.2), age.max = c(6.2),node = c(72), S = 1, tol = 1e-8,CV = FALSE, eval.max = 500, iter.max = 500)
+
+#Marmota himalayana 		Shanxi, China 	1.0 	M. himalayana - M. sibirica 	Gromov et al. 1965 NODE=80
+chronopl(phy, lambda=1, age.min = c(1), age.max = c(6),node = c(80), S = 1, tol = 1e-8,CV = FALSE, eval.max = 500, iter.max = 500)
+
+#Marmota monax 		Maryland, USA 	0.8 	M. monax - sister clade 		Kurten and Anderson (1980) NODE=69
+chronopl(phy, lambda=1, age.min = c(0.8), age.max = c(5.8),node = c(69), S = 1, tol = 1e-8,CV = FALSE, eval.max = 500, iter.max = 500)
+
+##Run chronopl for all fossils
+chronopl(phy, lambda=1, age.min = c(40.4,37.2,28.4,16,0.5,1.2,1,0.8), age.max = c(45.4,42.2,33.4,21,5.5,6.2,6,5.8),node = c(63,64,65,74,72,80,69), S = 1, tol = 1e-8,CV = FALSE, eval.max = 500, iter.max = 500)
+
+chronopl(phy, lambda=1, age.min = c(37.2, 28.4, 16, .5, 1.2, 1, 0.8), age.max = 45.4,node = c(62, 63, 64, 65, 74, 72, 80, 69), S = 1, tol = 1e-8,CV = FALSE, eval.max = 500, iter.max = 500)
+
+?chronopl
+
+#try again without rooting#####
+phy1 <- read.tree(file="top10pconcat-1.nexus.contree")
+##get node labels for fossils
+####these didn't work####
+#Douglassciurus oaxacensis 	Oaxaca, Mexico 	40.4 	Sciuridae - Aplodontiidae 		Ferrusquia-Villafranca et al. 2018 NODE=62
+getMRCA(phy1, tip = c("Aplodontia_rufa", "sciurus_vulgaris")) 
+
+#Plesiarctomys (Sciurus) spectabilis 	Egerkingen, Switzerland 	37.2 	Sciurus - other sciurids 		Costeur and Schneider, 2011 NODE=63
+getMRCA(phy1, tip = c("sciurus_vulgaris", "xerus_inaurus"))
+
+#Palaeosciurus goti 		Quercy, France 	28.4 	Xerus - Marmotini 		McKenna and Bell 1997 NODE=64 
+getMRCA(phy1, tip = c("xerus_inaurus", "Cynomys_gunnisoni"))
+
+####these did work####
+#Miospermophilus 		Colorado, USA 	16.0 	Spermophilus - Marmota 		(Black, 1963) NODE=65
+getMRCA(phy1, tip = c("Cynomys_gunnisoni", "Marmota_flaviventris_04"))
+
+#Marmota bobak 		Kantemirovka, Russia 	0.5 	M. bobak - M. baibacina 		Gromov et al. (1965); NODE=74 
+getMRCA(phy1, tip = c("Marmota_bobak_02", "Marmota_baibacina_01"))
+
+#Marmota marmota 		Castile, Spain 	1.2 	M. marmota - sister clade 		Gil and Ses´e (1991) NODE=72
+getMRCA(phy1, tip = c("Marmota_marmota_01", "Marmota_baibacina_01"))
+
+#Marmota himalayana 		Shanxi, China 	1.0 	M. himalayana - M. sibirica 	Gromov et al. 1965 NODE=80
+getMRCA(phy1, tip = c("Marmota_himalayana_02", "Marmota_sibirica_05"))
+
+#Marmota monax 		Maryland, USA 	0.8 	M. monax - sister clade 		Kurten and Anderson (1980) NODE=69
+getMRCA(phy1, tip = c("Marmota_monax_02", "Marmota_broweri_02"))
+
+##Run chronopl for each fossil
+
+#Miospermophilus 		Colorado, USA 	16.0 	Spermophilus - Marmota 		(Black, 1963) NODE=65
+chronopl(phy1, lambda=1, age.min = c(16), age.max = c(21),node = c(65), S = 1, tol = 1e-8,CV = FALSE, eval.max = 500, iter.max = 500)
+
+#Marmota bobak 		Kantemirovka, Russia 	0.5 	M. bobak - M. baibacina 		Gromov et al. (1965); NODE=74 
+chronopl(phy1, lambda=1, age.min = c(.5), age.max = c(5.5),node = c(74), S = 1, tol = 1e-8,CV = FALSE, eval.max = 500, iter.max = 500)
+
+#Marmota marmota 		Castile, Spain 	1.2 	M. marmota - sister clade 		Gil and Ses´e (1991) NODE=72
+chronopl(phy1, lambda=1, age.min = c(1.2), age.max = c(6.2),node = c(72), S = 1, tol = 1e-8,CV = FALSE, eval.max = 500, iter.max = 500)
+
+#Marmota himalayana 		Shanxi, China 	1.0 	M. himalayana - M. sibirica 	Gromov et al. 1965 NODE=80
+chronopl(phy1, lambda=1, age.min = c(1), age.max = c(6),node = c(80), S = 1, tol = 1e-8,CV = FALSE, eval.max = 500, iter.max = 500)
+
+#Marmota monax 		Maryland, USA 	0.8 	M. monax - sister clade 		Kurten and Anderson (1980) NODE=69
+chronopl(phy1, lambda=1, age.min = c(0.8), age.max = c(5.8),node = c(69), S = 1, tol = 1e-8,CV = FALSE, eval.max = 500, iter.max = 500)
+
+chrono <- c(chronopl(phy1, lambda=1, age.min = c(16), age.max = c(21),node = c(65), S = 1, tol = 1e-8,CV = FALSE, eval.max = 500, iter.max = 500),chronopl(phy1, lambda=1, age.min = c(.5), age.max = c(5.5),node = c(74), S = 1, tol = 1e-8,CV = FALSE, eval.max = 500, iter.max = 500),chronopl(phy1, lambda=1, age.min = c(1.2), age.max = c(6.2),node = c(72), S = 1, tol = 1e-8,CV = FALSE, eval.max = 500, iter.max = 500)
+            ,chronopl(phy1, lambda=1, age.min = c(1), age.max = c(6),node = c(80), S = 1, tol = 1e-8,CV = FALSE, eval.max = 500, iter.max = 500),
+            chronopl(phy1, lambda=1, age.min = c(0.8), age.max = c(5.8),node = c(69), S = 1, tol = 1e-8,CV = FALSE, eval.max = 500, iter.max = 500)
+)
+
+plot(chrono)
+
+#concatenating the individual chronopl functions worked, but created individual plots, didn't combine results into one tree
+#running this as above with the fossils that worked for the unrooted tree didn't work
+chronopl(phy1, lambda=1, age.min = c(37.2, 28.4, 16, .5, 1.2, 1, 0.8), age.max = 45.4,node = c(62, 63, 64, 65, 74, 72, 80, 69), S = 1, tol = 1e-8,CV = FALSE, eval.max = 500, iter.max = 500)
+
+
+#try running chrnpl with the xerus and marmotini, save calibrated tree in figtree and exprt in image in ppt and label clades
+#Palaeosciurus goti 		Quercy, France 	28.4 	Xerus - Marmotini 		McKenna and Bell 1997 NODE=64 
+Marmotini <- chronopl(phy, lambda=1, age.min = c(28.4), age.max = c(33.4),node = c(64), S = 1, tol = 1e-8,CV = FALSE, eval.max = 500, iter.max = 500)
+
+#Miospermophilus 		Colorado, USA 	16.0 	Spermophilus - Marmota 		(Black, 1963) NODE=65
+Marmota <- chronopl(phy, lambda=1, age.min = c(16), age.max = c(21),node = c(65), S = 1, tol = 1e-8,CV = FALSE, eval.max = 500, iter.max = 500)
+
+#Xerus-Marmotini & Spermophilus-Marmota
+Combo <- chronopl(phy, lambda=1, age.min = c(16,28.4), age.max = c(21,33.4),node = c(65,64), S = 1, tol = 1e-8,CV = FALSE, eval.max = 500, iter.max = 500)
+
+#plot the final chronograms
+pMarmotini <- plot(Marmotini)
+pMarmta <- plot(Marmota)
+pCombo <- plot(Combo)
+
+pCombo <- plot.phylo(Combo,use.edge.length = TRUE, show.tip.label = TRUE, show.node.label = FALSE)
+add.scale.bar(pCombo)
+
+write.nexus(Combo,file = "pCombo_chronogram.nexus")
+write.tree(Combo, file = "pCombo_chronogram.treefile")
+
+#unrooted tree for scaled plot in figtree since figtree can't open the rooted tree
+#Xerus-Marmotini & Spermophilus-Marmota
+Combo1 <- chronopl(phy1, lambda=1, age.min = c(16,28.4), age.max = c(21,33.4),node = c(65,64), S = 1, tol = 1e-8,CV = FALSE, eval.max = 500, iter.max = 500)
+write.tree(Combo1, file = "pCombo1_chronogram.treefile")
+
+
+#unrooted tree with Marmota fossils, this is the script for the chronogram used in in the report 
+Combo2 <- chronopl(phy1, lambda=1, age.min = c(0.5,1.2,16,28.4), age.max = c(5.5,6.2,21,33.4),node = c(74,72,65,64), S = 1, tol = 1e-8,CV = FALSE, eval.max = 500, iter.max = 500)
+write.tree(Combo2, file = "pCombo2_chronogram.treefile")
+
+
+
