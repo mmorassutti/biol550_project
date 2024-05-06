@@ -1,7 +1,8 @@
 **Matthew Morassutti** 
-**BIOL 550 SPR'24 Project Proposal** UPDATED
+**BIOL 550 SPR'24 Project** 
+**Final Report**
 
-**Draft Title:**
+**Title:**
 Resolving the divergence times of _Marmota_ using Ultraconserved Elements
 
 **_NOTE_** Files were too large to upload to GitHub. Find all files used as input data on Google Drive at the link below: 
@@ -20,7 +21,7 @@ Marmots (_Marmota sp._) are a genus of large-bodied ground squirrels known for t
 Marmots belong to the tribe Marmotini, commonly known as ground squirrels, and the subtribe Marmotina, which contains the two extant genera _Marmota_ and _Cynomys_. The Marmotini tribe contains the subtribes Tamiina, Marmotina, Spermophilina, and seven basal and _incertae sedis_ genera (Herron _et al._ 2004). 
 
 ![FIgure1_Map](https://github.com/mmorassutti/biol550_project/assets/160165592/754fd5d0-e26a-4f1c-95ab-336c0263c1f0)
-
+**Figure 1.** Map of candidate representatives from all 15 extant species of _Marmota_ included in the dataset obtained from authors of Mills _et al._ 2023.
 
 **Methods Overview**
 
@@ -39,13 +40,15 @@ For this project, the time calibration was completed in R using the Analyses of 
 The 75% concatenated supermatrix obtained from researchers for Mills _et al._ 2023 consisted of 61 taxa and 1192 loci. This supermatrix was reduced to 61 taxa and 119 loci. This nexus file was used to obtain a cladogram with nodes labeled with bootstrap support values (Figure 2). Of the 58 nodes with bootstrap support values, 31 show a score of 100, 13 nodes showed scores from 90-99, 9 showed scores from 70-89, and 6 nodes showed scores from 50-69. The cladogram shown in Figure 2 has tip labels that include GenBank accession numbers or other labels for the taxa which were irrelevant to this analysis, so the taxa in the nexus file were re-labeled with numeric codes where there were multiple candidates for a species. A cladogram showing the taxonomic hierarchies was obtained, and shows some species with non-monophyletic sorting (Figure 3). The cladogram sorted _Aplodntia rufa_ monophyletically, with a node that shows a polytomy with Gliridae and Sciuridae, each forming expected clades. Sciuridae further sorted, as expected, into a clade formed the Marmotini tribe sister to genus _Xerus_. _Xerus_ formed a clade sister to the other sciurids in the dataset, _Sciurus carolinensis_ and _Sciurus vulgaris_. Marmotini was sorted into to two main clades, with the genus _Marmota_ forming a clade, and another clade formed by _Cynomys gunnisoni_, _Ictidomys tridecemlineatus_, and _Urocitellus parryii_. This clade shows _U. parryii_ as sister to a clade formed by _C. gunnisoni_, and _I. tridecemlineatus_, which conforms with the latter two’s position shown in a cladogram obtained through maximum parsimony analysis (Helgen _et al._ 2009), and the species tree obtained in Mills _et al._ 2023 (Figure 4). This cladogram shows the subgenus _Petromarmota_ resolving as expected, with a clade of _Marmota_ containing all candidates from _M. caligata_, _M. flaviventris_, _M. olympus_, and _M. vancouverensis_.
 
 ![Figure2_bootstrapvalues](https://github.com/mmorassutti/biol550_project/assets/160165592/0cfdadfc-5a22-4e7d-b47d-174c068549c5)
+**FIgure 2.** A maximum-likelihood cladogram including bootstrap support values at nodes with tip labels showing candidate source obtained in IQ-TREE using the top 10% of loci from the 75% concatented supermatrix from authors of Mills _et al._ 2023. 
 
 ![Figure3_Cladogram](https://github.com/mmorassutti/biol550_project/assets/160165592/90e1bdc7-3b6c-4c4c-ae20-6fee7ee0634a)
-
+**Figure 3.** A maximum-likelihood cladogram including bootstrap support values at nodes with tip labels showing candidate source obtained in IQ-TREE using the top 10% of loci from the 75% concatented supermatrix from authors of Mills _et al._ 2023.
 
 Non-monophyletic sorting occurred for three species: _M. baibacina_, _M. caligata_, and _M. himalayana_, seen in Figure 3. Two candidates were labeled as _M. baibacina_, with one candidate, Marmota_baibacina_01, placed sister to the clade formed by the candidates representing _M. menzbieri_, and the other candidate, Marmota_baibacina_02, placed in a clade with the candidate representing _M. kastschenkoi_. Candidates representing _M. caligata_ were sorted into multiple clades within subgenus _Petromarmota_. The candidate Marmota_caligata_10 was placed sister to the clade formed by the candidates representing _M. olympus_, with these taxa comprising a clade sister to the candidate Marmota_caligata_09. The candidates Marmota_caligata_01 through _06 formed a clade sister to the candidates representing _M. vancouverensis_, with these taxa forming a clade sister to the candidates Marmota_caligata_07 and _08. The four candidates representing _M. himalayana_ were grouped into two separate clades of genus _Marmota_. The candidates Marmota_himalayana_02 through _04 were placed in a clade sister to the candidate representing _M. caudata_, while the candidate Marmota_himalayana_01 was placed sister to the clade formed by the candidates representing _M. bobak_.
 
 ![Figure4_MillsSpeciesTree](https://github.com/mmorassutti/biol550_project/assets/160165592/ddbe97c6-a998-4ffb-8829-cbff40b2df52)
+**Figure 4.** A maximum likelihood species tree from Mills _et al._ 2023 obtained with coalescent-based methods using gene trees from each UCE loci present in 75% of taxa in their dataset and the mitogenomes from these taxa. 
 
 The chronogram obtained through a calibration completed with four fossils and a penalized likelihood method may be seen in Figure 5. This chronogram will be compared to that obtained using 8 fossils and with Bayesian methods, which is labeled as Figure 6 in this report (Figure 7 in Mills _et al._ 2023). The chronogram obtained from penalized likelihood analysis for this project the divergence time of tribe Marmotini from tribe Xerini at 30.9 million years ago (Ma), while this divergence time from the chronogram obtained from Bayesian analysis estimated this divergence time at 35.0 Ma (95%confidence interval (C.I.) = 33.8–36.7). The penalized likelihood analysis estimated the divergence of _Marmota_ from other members of Marmotini at 18.4 Ma, while Bayesian analysis estimated this divergence at 16.3 Ma (95% C.I. = 13.7–18.8). Penalized likelihood analysis estimated the divergence of subgenus _Petromarmota_ from other members of _Marmota_ at 15.5 Ma, while Bayesian analysis estimated this divergence at 5.71 Ma (95% C.I. = 3.95–7.62). For the crown diversification within _Petromarmota_, this project’s analysis estimated this to occur 13.2 Ma, however the estimation by Bayesian analysis estimated this to have occurred 2.31 Ma (95% C.I. = 2.62–3.11). Finally, this project’s analysis estimated the crown diversification of other members of _Marmota_, in the subgenus _Marmota_, to have occurred 12.5 Ma, while Bayesian analysis estimated this radiation to have occurred 3.57 Ma (95% C.I. = 2.45–4.72). 
 
